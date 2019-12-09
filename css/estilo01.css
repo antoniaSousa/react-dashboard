@@ -1,0 +1,20 @@
+body{
+    background: rgb(188, 149, 206);
+    font-size: 15px;
+}
+
+/* aula 05 */
+/* selecao por tipo de elemento */
+p, body, h1, h2{
+    font-size: 12px;
+}
+
+/* selecao por id do elemento*/
+#paragrafo02{
+    font-size: 30px;
+}
+
+/* selecao por classe */
+.nome_da_classe{
+    font-size: 50px;
+}
