@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MenuSuperior from './Componente/MenuSuperior/MenuSuperior';
-class app extends Component {
+class App extends Component {
   render(){
     return (
       <div>
