@@ -1,31 +1,37 @@
 import React, {Component} from "react";
-
+//import {URL_API} from "./../../services/base";
+import {consultarResumo} from "./../../services/resumoService";
 class Resumo extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-        consultas: {
-          consultas_30dias_anteriores : 0,
-          consultas_30dias_posteriores : 0  
-        },
-
-        faturamento : {
-            anterior : {
-                valor: 0,
-                comparativo : 0
+            consultas: {
+                consultas_30dias_anteriores: 0,
+                consultas_30dias_posteriores: 0
             },
 
-            previsto : {
-                valor: 0,
-                comparativo : 0
-            }
+            faturamento: {
+                anterior: {
+                    valor: 0,
+                    comparativo: 0
+                },
 
+                previsao: {
+                    valor: 0,
+                    comparativo: 0
+                }
+
+            }
         }
     }
+    componentDidMount(){
+    //fetch (URL_API + "/resumo").then(resultado => resultado.json().then(dados => this.setState(dados)));
+        consultarResumo().then(dados=> this.setState(dados));
 }
-    render(){
-        return(
+    render() {
+        return (
             <div>
+                <div>
                 <h2 className="mt-2">Resumo </h2>
                 <div className="row">
                     <div className="col">
@@ -38,18 +44,26 @@ class Resumo extends Component {
                                         30 dias anteriores
                                     </div>
                                     <div className="card-body">
-                                        {this.state.consultas.consultas_30dias_anteriores}
+                                        {
+                                            this.state
+                                            .consultas
+                                            .consultas_30dias_anteiores
+
+                                        }
                                     </div>
                                 </div>
+                            </div>
                                 <div className="col">
                                     <div className="card mt-2 text-center">
                                         <div className="card-header">
                                             Proximos 30 dias
                                         </div>
                                         <div className="card-body">
-                                            {this.state.consultas.consultas_30dias_posteriores}
+                                            {this.state
+                                                .consultas
+                                                .consultas_30dias_posteriores}
                                         </div>
-                                        </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -61,12 +75,16 @@ class Resumo extends Component {
                                         <div className="card-header">
                                             30 dias anteriores
                                         </div>
-                                    <div className="card-body">
-                                        {this.state.faturamento.anterior.valor.toLocaleString("pt-BR", {style : "currency", currency : "BRL"})}
-                                        <span className="badge badge-success m1-1">
-                                            {this.state.faturamento.anterior.comparativo} %
-                                            </span> 
-                                    </div>
+
+                                        <div className="card-body">
+                                            {this.state.faturamento.anterior.valor.toLocaleString("pt-BR", {
+                                                style: "currency",
+                                                currency: "BRL"
+                                            })}
+                                            <span className= {"badge ml-1" + (this.state.faturamento.anterior.comparativo > 0 ?
+                                                "badge-success" : "badge-danger")} > {this.state.faturamento.anterior.comparativo} %
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className="col">
                                         <div className="card mt-2 text-center">
@@ -74,15 +92,20 @@ class Resumo extends Component {
                                                 Proximos 30 dias
                                             </div>
                                             <div className="card-body">
-                                                {this.state.faturamento.previsto.valor.toLocaleString("pt-BR", {style : "currency", currency : "BRL"})}
-                                                <span className="badge badge-danger m1-1">
-                                                    {this.state.faturamento.previsto.comparativo} %
+                                                {this.state.faturamento.previsao.valor.toLocaleString("pt-BR", {
+                                                    style: "currency",
+                                                    currency: "BRL"
+                                                })
+                                                }
+                                                <span className={"badge ml-1" + (this.state.faturamento.previsao.comparativo > 0 ? "badge-success" : "badge-danger")} >
+                                                   { this.state.faturamento.previsao.comparativo} %
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                          
                         </div>
                     </div>
                 </div>
